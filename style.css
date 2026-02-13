@@ -1,0 +1,75 @@
+body{
+    margin:0;
+    height:100vh;
+    background:linear-gradient(to bottom,#ff7aa2,#ff5c8a);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+}
+
+.container{
+    position:relative;
+}
+
+.card{
+    background:#ff8fab;
+    padding:40px 30px;
+    border-radius:20px;
+    width:320px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+h2{
+    color:white;
+}
+
+.btn-row{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-top:20px;
+}
+
+button{
+    padding:10px 25px;
+    border-radius:25px;
+    border:none;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.35s ease;
+}
+
+#yesBtn{
+    background:#ff2e63;
+    color:white;
+}
+
+#noBtn{
+    background:white;
+    color:#ff2e63;
+}
+
+#loveMessage{
+    color:white;
+    margin-top:20px;
+    font-size:14px;
+    opacity:0;
+    transition:opacity 1s ease;
+}
+
+/* Fireworks */
+.particle{
+    position:absolute;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    animation:explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+    0%{transform:translate(0,0);opacity:1;}
+    100%{transform:translate(var(--x),var(--y));opacity:0;}
+}
