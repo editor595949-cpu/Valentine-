@@ -1,0 +1,24 @@
+{
+  "sms_providers": [
+    {
+      "name": "Twilio",
+      "sid": "YOUR_TWILIO_SID",
+      "token": "YOUR_TWILIO_AUTH_TOKEN",
+      "from": "+1234567890"
+    },
+    {
+      "name": "Plivo",
+      "auth_id": "YOUR_PLIVO_AUTH_ID",
+      "auth_token": "YOUR_PLIVO_AUTH_TOKEN",
+      "from": "+0987654321"
+    }
+  ],
+  "call_providers": [
+    {
+      "name": "Twilio",
+      "sid": "YOUR_TWILIO_SID",
+      "token": "YOUR_TWILIO_AUTH_TOKEN",
+      "from": "+1234567890"
+    }
+  ]
+}
